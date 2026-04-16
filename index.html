@@ -1,499 +1,199 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gakribet - Solusi Hidup Tanpa Ribet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Affiliate Otomatis</title>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+body {
+  background: #0f172a;
+  color: white;
+}
 
-        /* HERO SECTION */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-        }
+section {
+  padding: 80px 20px;
+  text-align: center;
+}
 
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-        }
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
 
-        .hero-content p {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            font-weight: 300;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
-        }
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
 
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin: 0 10px;
-            border: none;
-        }
+.hero p {
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
 
-        .btn-primary {
-            background: white;
-            color: #3b82f6;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
-        }
+.btn {
+  padding: 15px 30px;
+  background: #22c55e;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.4);
-        }
+/* CARD */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+.card {
+  background: #1e293b;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  width: 250px;
+}
 
-        .btn-secondary:hover {
-            background: white;
-            color: #3b82f6;
-            transform: translateY(-3px);
-        }
+/* POPUP */
+.popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  display: none;
+}
 
-        /* CHAT SECTION */
-        #chat {
-            padding: 100px 0;
-            background: #f8fafc;
-        }
+/* NOTIF */
+.fake {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #22c55e;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: none;
+}
 
-        .chat-container {
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .chat-box {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .chat-bubble {
-            background: #3b82f6;
-            color: white;
-            padding: 20px 25px;
-            border-radius: 20px 20px 20px 5px;
-            margin-bottom: 20px;
-            max-width: 80%;
-            margin-left: auto;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 15px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .chat-input:focus {
-            border-color: #3b82f6;
-        }
-
-        /* PROBLEM SECTION */
-        #problems {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 60px;
-            color: #1e293b;
-        }
-
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .problem-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-        }
-
-        .problem-emoji {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .problem-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #1e293b;
-        }
-
-        /* SOLUTION SECTION */
-        #solutions {
-            padding: 100px 0;
-            background: #f8fafc;
-        }
-
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .solution-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .solution-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-        }
-
-        .solution-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 20px 0 15px 0;
-            color: #1e293b;
-        }
-
-        .solution-card p {
-            color: #64748b;
-            margin-bottom: 25px;
-            line-height: 1.7;
-        }
-
-        /* HOW IT WORKS */
-        #howitworks {
-            padding: 100px 0;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .step {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: #3b82f6;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 25px;
-        }
-
-        .step h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #1e293b;
-        }
-
-        /* FOOTER */
-        #footer {
-            background: #1e293b;
-            color: white;
-            padding: 60px 0 30px;
-            text-align: center;
-        }
-
-        .footer-content h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .footer-tagline {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-
-        .contact-links {
-            margin-bottom: 30px;
-        }
-
-        .contact-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
-
-        .contact-links a:hover {
-            opacity: 1;
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                margin-bottom: 1rem;
-            }
-            
-            .hero-content p {
-                margin-bottom: 2rem;
-            }
-            
-            .btn {
-                display: block;
-                margin: 10px auto;
-                max-width: 250px;
-            }
-            
-            #hero {
-                padding: 100px 20px 50px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .chat-box {
-                padding: 30px 20px;
-            }
-        }
-
-        /* SMOOTH SCROLL */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+/* TRACKING */
+.counter {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+</style>
 </head>
+
 <body>
-    <!-- HERO SECTION -->
-    <section id="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Masalah lo hari ini apa?</h1>
-                <p>Tanya aja. Temuin solusi tanpa ribet.</p>
-                <a href="#chat" class="btn btn-primary">🚀 Mulai Sekarang</a>
-                <a href="#problems" class="btn btn-secondary">Lihat Masalah Umum</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- AI CHAT SECTION -->
-    <section id="chat">
-        <div class="container">
-            <div class="chat-container">
-                <div class="chat-box">
-                    <div class="chat-bubble">
-                        Halo! Ada yang bisa saya bantu?
-                    </div>
-                    <input type="text" class="chat-input" placeholder="Ceritain masalah lo di sini..." />
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero">
+  <h1>Link Kerja Sendiri, Kamu Tinggal Nikmatin</h1>
+  <p>Sistem otomatis untuk hasilin dari affiliate</p>
+  <button class="btn" onclick="goAffiliate()">Mulai Sekarang</button>
+  <div class="counter" id="clickCount">Total Klik: 0</div>
+</section>
 
-    <!-- PROBLEMS SECTION -->
-    <section id="problems">
-        <div class="container">
-            <h2 class="section-title">Masalah lo kayak gini?</h2>
-            <div class="problems-grid">
-                <div class="problem-card">
-                    <div class="problem-emoji">😴</div>
-                    <h3>Susah bangun pagi</h3>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-emoji">📚</div>
-                    <h3>Tidak fokus</h3>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-emoji">💸</div>
-                    <h3>Keuangan berantakan</h3>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-emoji">😩</div>
-                    <h3>Hidup berantakan</h3>
-                </div>
-            </div>
-            <p style="text-align: center; font-size: 1.2rem; color: #64748b; max-width: 600px; margin: 0 auto;">
-                Semua orang punya masalah. Tapi gak semua punya solusi.
-            </p>
-        </div>
-    </section>
+<!-- PROBLEM -->
+<section>
+  <h2>Masalah Umum</h2>
+  <div class="grid">
+    <div class="card">Capek promosi</div>
+    <div class="card">Sepi klik</div>
+    <div class="card">Gak ngerti mulai</div>
+  </div>
+</section>
 
-    <!-- SOLUTIONS SECTION -->
-    <section id="solutions">
-        <div class="container">
-            <h2 class="section-title">Solusi praktis dari gakribet</h2>
-            <div class="solutions-grid">
-                <div class="solution-card">
-                    <div class="problem-emoji">😴</div>
-                    <h3>Susah bangun</h3>
-                    <p>Gunakan alarm keras + tips psikologi biar lo langsung melek!</p>
-                    <a href="#" class="btn btn-primary">Lihat Produk</a>
-                </div>
-                <div class="solution-card">
-                    <div class="problem-emoji">📚</div>
-                    <h3>Tidak fokus</h3>
-                    <p>Gunakan timer belajar + teknik Pomodoro yang terbukti efektif.</p>
-                    <a href="#" class="btn btn-primary">Lihat Produk</a>
-                </div>
-                <div class="solution-card">
-                    <div class="problem-emoji">💸</div>
-                    <h3>Keuangan berantakan</h3>
-                    <p>Gunakan catatan keuangan otomatis + budgeting yang gampang.</p>
-                    <a href="#" class="btn btn-primary">Lihat Produk</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- PRODUK -->
+<section>
+  <h2>Pilih Produk</h2>
+  <div class="grid" id="productList"></div>
+</section>
 
-    <!-- HOW IT WORKS -->
-    <section id="howitworks">
-        <div class="container">
-            <h2 class="section-title">Cara kerjanya gampang banget</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Tulis masalah lo</h3>
-                    <p>Ceritain aja apa yang lagi lo rasain sekarang.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>AI bantu analisa</h3>
-                    <p>AI kami analisa masalah lo secara mendalam.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Dapat solusi praktis</h3>
-                    <p>Dapatkan solusi yang bisa langsung lo terapin!</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- CTA -->
+<section>
+  <h2>Mulai Sekarang</h2>
+  <button class="btn" onclick="goAffiliate()">Aktifkan Sistem</button>
+</section>
 
-    <!-- FOOTER -->
-    <section id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <h3>gakribet</h3>
-                <p class="footer-tagline">Solusi hidup tanpa ribet</p>
-                <div class="contact-links">
-                    <a href="mailto:hello@gakribet.com">hello@gakribet.com</a>
-                    <a href="https://wa.me/6281234567890">WhatsApp</a>
-                </div>
-                <p style="opacity: 0.6; font-size: 0.9rem;">© 2024 gakribet. All rights reserved.</p>
-            </div>
-        </div>
-    </section>
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <p>🔥 Diskon hari ini!</p>
+  <button class="btn" onclick="goAffiliate()">Klik Disini</button>
+</div>
 
-    <!-- CHATBOT INTEGRATION SCRIPT (KOSONG) -->
-    <script>
-        // Chatbot integration will go here
-        window.chatbotInit = function() {
-            console.log('Chatbot ready for integration');
-        };
+<!-- FAKE -->
+<div class="fake" id="fakeNotif"></div>
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+<script>
+// MULTI PRODUK
+const products = [
+  {name: "Produk 1", link: "https://affiliate1.com"},
+  {name: "Produk 2", link: "https://affiliate2.com"},
+  {name: "Produk 3", link: "https://affiliate3.com"}
+];
 
-        // Chat input focus effect
-        document.querySelector('.chat-input').addEventListener('focus', function() {
-            this.parentElement.style.transform = 'scale(1.02)';
-        });
+// render produk
+const productList = document.getElementById("productList");
+products.forEach(p => {
+  let el = document.createElement("div");
+  el.className = "card";
+  el.innerHTML = `
+    <h3>${p.name}</h3>
+    <button class="btn" onclick="goProduct('${p.link}')">Lihat</button>
+  `;
+  productList.appendChild(el);
+});
 
-        document.querySelector('.chat-input').addEventListener('blur', function() {
-            this.parentElement.style.transform = 'scale(1)';
-        });
-    </script>
+// tracking klik
+let clicks = localStorage.getItem("clicks") || 0;
+document.getElementById("clickCount").innerText = "Total Klik: " + clicks;
+
+function trackClick() {
+  clicks++;
+  localStorage.setItem("clicks", clicks);
+  document.getElementById("clickCount").innerText = "Total Klik: " + clicks;
+}
+
+// redirect default
+function goAffiliate() {
+  trackClick();
+  window.location.href = products[0].link;
+}
+
+// redirect produk
+function goProduct(link) {
+  trackClick();
+  window.location.href = link;
+}
+
+// popup delay
+setTimeout(() => {
+  document.getElementById("popup").style.display = "block";
+}, 4000);
+
+// fake notif realistis
+const names = ["Andi", "Rina", "Budi", "Sari", "Dika"];
+setInterval(() => {
+  let notif = document.getElementById("fakeNotif");
+  let name = names[Math.floor(Math.random() * names.length)];
+  notif.innerText = name + " baru saja beli!";
+  notif.style.display = "block";
+
+  setTimeout(() => notif.style.display = "none", 3000);
+}, 7000);
+</script>
+
 </body>
-  </html>
+</html>
