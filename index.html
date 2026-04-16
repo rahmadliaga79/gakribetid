@@ -173,9 +173,10 @@ function goAffiliate() {
 }
 
 // redirect produk
-function goProduct(link) {
-  trackClick();
-  window.location.href = link;
+function trackClick() {
+  fetch("http://localhost:3000/track", {
+    method: "POST"
+  });
 }
 
 // popup delay
